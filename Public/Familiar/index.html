@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Página Familiar</title>
+</head>
+
+<body>
+	<h1> Página Familiar </h1>
+	<form id="Formulario" method="post">
+		<label>Nombre(s) del Paciente:</label>
+		<input type="text" id="nombrePaciente" placeholder="Nombre del Paciente" name="nombrePaciente">
+		<label>Apellidos del Paciente:</label>
+		<input type="text" id="apellidosPaciente" placeholder="Apellidos del Paciente" name="apellidosPaciente">
+		<br><br>
+		<label>Numero de Expediente</label>
+		<input type="text" id="numeroExpediente" placeholder="Numero de Expediente" maxlength="8" name="numeroExpediente">
+		<br><br>
+		<label>Nombre(s) del Visitante</label>
+		<input type="text" id="nombreFamiliar" placeholder="Nombre del Visitante" name="nombreFamiliar">
+		<label>Apellidos del Visitante</label>
+		<input type="text" id="apellidosFamiliar" placeholder="Apellidos del Visitante" name="apellidosFamiliar">
+		<br><br>
+		<button id="url" type="button">Obtener URL</button>
+		<div id="Aviso" style="display:none;">¡Listo!</div>
+		<br><br>
+		<button id="Ingresar" type="submit" disabled>Ingresar</buton>
+	</form>
+</body>
+
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script src="./script/main.js" charset="utf-8" type="module"></script>
+
+</html>
