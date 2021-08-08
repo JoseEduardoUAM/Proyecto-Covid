@@ -16,7 +16,7 @@ let Salas = [];
 io.on('connection' , (socket) => {
 
 	socket.on( 'solicitarURL' , () => {
-		let url = 'https://192.168.1.67:3000/' + Funcion.generarURL();
+		let url = `https://${Servidor.direccionIP}:${Servidor.puerto}/` + Funcion.generarURL();
 		socket.emit('recibirURL' , url );
 	});
 
