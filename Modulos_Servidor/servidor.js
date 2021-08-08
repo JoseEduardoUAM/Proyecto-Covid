@@ -2,7 +2,7 @@
 const Dep = require('./Dependencias.js');
 
 //Se agrega el puerto 3000
-Dep.app.set( 'port' , process.env.PORT || 3000);
+Dep.app.set( 'port' , process.env.PORT || 3000 );
 
 //Dirección de los archivos estaticos
 Dep.app.use( Dep.express.static( Dep.path.join( __dirname , '..' , 'Public' ) ) );
