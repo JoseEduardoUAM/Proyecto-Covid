@@ -1,4 +1,4 @@
-import { btnEnviar, btnURL, conAviso, conBtn, form } from './identificadores.js';
+import { btnEnviar, btnURL, conAviso, conBtn, form, URL } from './identificadores.js';
 import { CrearDatos, VerificarDatos } from './funciones.js';
 
 let urlSala;
@@ -7,6 +7,7 @@ const socket = io('/');
 
 socket.on( 'recibirURL' , (url) => {
 	urlSala = url;
+    URL.value = url;
     form.action = url;
 });
 
