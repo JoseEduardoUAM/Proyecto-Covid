@@ -1,10 +1,10 @@
-export function CrearFormulario( nombre , url ){
+export function CrearFormulario( miNombre , nombreFamiliar , url ){
 	let form = document.createElement('form');
 	document.body.appendChild(form);
 	form.method = 'post';
 	form.action = url;
 
-	let datos = [[ "nombrePaciente" , nombre ] , [ "url" , url ] , ["persona", "paciente" ] ];
+	let datos = [[ "miNombre" , miNombre ] , [ "nombreFamiliar" , nombreFamiliar ] , [ "url" , url ] , ["persona", "paciente" ] ];
 
 	for( let x of datos ){
 		let input = document.createElement('input');

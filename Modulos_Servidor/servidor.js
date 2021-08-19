@@ -28,14 +28,16 @@ Dep.app.post( '/:id' , (req,res) => {
     if( req.body.persona == "familiar" ){
         console.log("Entro al familiar " + req.body.nombreFamiliar + " " + req.body.apellidosFamiliar);
         res.render( 'index' , {
-            nombre : req.body.nombreFamiliar + " " + req.body.apellidosFamiliar,
+            miNombre : req.body.nombreFamiliar + " " + req.body.apellidosFamiliar,
+            familiarNombre : req.body.nombrePaciente,
             url : req.body.url,
             regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Familiar`
         });
     }else if( req.body.persona == "paciente" ){
         console.log("Entro al paciente " + req.body.nombrePaciente);
         res.render( 'index' , {
-            nombre : req.body.nombrePaciente,
+            miNombre : req.body.nombrePaciente,
+            familiarNombre : req.body.familiarNombre,
             url : req.body.url,
             regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Paciente`
         });

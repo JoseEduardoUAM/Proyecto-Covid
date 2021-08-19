@@ -68,9 +68,8 @@ function pintarDatos( datos ){
   boton.innerText = "Enviar";
   boton.onclick = function(){
     socket.emit( 'unirseSala' , datos.url);
-    CrearFormulario( `${datos.nombrePaciente} ${datos.apellidosPaciente}` , datos.url );
+    CrearFormulario( `${datos.nombrePaciente} ${datos.apellidosPaciente}` , `${datos.nombreFamiliar} ${datos.apellidosFamiliar}` , datos.url );
   }
-  console.log( `${datos.nombrePaciente} ${datos.apellidosPaciente}` );
   celdaBtn.appendChild(boton);
   contenido.appendChild(celdaBtn);
 
