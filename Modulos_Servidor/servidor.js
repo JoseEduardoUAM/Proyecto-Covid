@@ -29,15 +29,15 @@ Dep.app.post( '/:id' , (req,res) => {
         console.log("Entro al familiar " + req.body.nombreFamiliar + " " + req.body.apellidosFamiliar);
         res.render( 'index' , {
             miNombre : req.body.nombreFamiliar + " " + req.body.apellidosFamiliar,
-            familiarNombre : req.body.nombrePaciente,
+            familiarNombre : req.body.nombrePaciente + " " + req.body.apellidosPaciente,
             url : req.body.url,
             regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Familiar`
         });
     }else if( req.body.persona == "paciente" ){
         console.log("Entro al paciente " + req.body.nombrePaciente);
         res.render( 'index' , {
-            miNombre : req.body.nombrePaciente,
-            familiarNombre : req.body.familiarNombre,
+            miNombre : req.body.miNombre,
+            familiarNombre : req.body.nombreFamiliar,
             url : req.body.url,
             regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Paciente`
         });

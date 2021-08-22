@@ -1,4 +1,4 @@
-import {entradaMensaje,videoRemoto,registrarMensaje,url, miNombre} from './identificadores.js';
+import {entradaMensaje,videoRemoto,registrarMensaje,url, miNombre,familiarNombre,registrarAviso} from './identificadores.js';
 
 export const iniciarConexion = (stream) => {
   const socket = io('/');
@@ -39,11 +39,11 @@ export const iniciarConexion = (stream) => {
     canalLocal = conexionLocal.createDataChannel('chat_channel');
 
     // Llamada a función que recibe un mensaje en el canal
-    canalLocal.onmessage = (event) => registrarMensaje(`${event.data}`,"mensajeFamiliar", "Sistema");
+    canalLocal.onmessage = (event) => registrarMensaje(`${event.data}`,"familiarMensaje", `${familiarNombre.value}`);
     // Function Called When Channel is Opened
-    canalLocal.onopen = (event) => registrarMensaje(`Channel Changed: ${event.type}`,"mensajeFamiliar", "Sistema");
+    canalLocal.onopen = (event) => registrarAviso("Canal Abierto","SistemaAbierto");
     // Function Called When Channel is Closed
-    canalLocal.onclose = (event) => registrarMensaje(`Channel Changed: ${event.type}`,"mensajeFamiliar", "Sistema");
+    canalLocal.onclose = (event) => registrarAviso("Canal Cerrado","SistemaCerrado");
 
     // Crear oferta, establecer descripción local y enviar oferta a otros usuarios conectados
     conexionLocal
@@ -78,11 +78,11 @@ export const iniciarConexion = (stream) => {
       canalRemoto = channel;
 
       // Llamada a funcion que recibe un mensaje en el canal
-      canalRemoto.onmessage = (event) => registrarMensaje(`${event.data}`,"mensajeFamiliar", "Sistema prueba");
+      canalRemoto.onmessage = (event) => registrarMensaje(`${event.data}`,"familiarMensaje", `${familiarNombre.value}`);
       // Función llamada cuando se abre el canal
-      canalRemoto.onopen = (event) => registrarMensaje(`Canal Abierto: ${event.type}`,"mensajeFamiliar", "Sistema prueba");
+      canalRemoto.onopen = (event) => registrarAviso("Canal Abierto","SistemaAbierto");
       // Función llamada cuando el canal está cerrado
-      canalRemoto.onclose = (event) => registrarMensaje(`Canal Cerrado: ${event.type}`,"mensajeFamiliar", "Sistema prueba");
+      canalRemoto.onclose = (event) => registrarAviso("Canal Cerrado","SistemaCerrado");
     }
 
     // Establecer descripción local y remota y crear respuesta
@@ -117,7 +117,7 @@ export const iniciarConexion = (stream) => {
       // Limpiar entrada
       entradaMensaje.value = '';
       // Mensaje de registro como enviado
-      registrarMensaje(`${message}`,"mensajeFamiliar", `${miNombre}`);
+      registrarMensaje(`${message}`,"miMensaje", `${miNombre.value}`);
 
       // GET el canal (puede ser local o remoto)
       const channel = canalLocal || canalRemoto;
