@@ -26,7 +26,7 @@ Dep.app.use(Dep.express.urlencoded({ extended: true }));
 //Documentos dinamicos con ejs
 Dep.app.post( '/:id' , (req,res) => {
     if( req.body.persona == "familiar" ){
-        console.log("Entro al familiar " + req.body.nombreFamiliar + " " + req.body.apellidosFamiliar);
+        console.log("Entro familiar " + req.body.nombreFamiliar + " " + req.body.apellidosFamiliar);
         res.render( 'index' , {
             miNombre : req.body.nombreFamiliar + " " + req.body.apellidosFamiliar,
             familiarNombre : req.body.nombrePaciente + " " + req.body.apellidosPaciente,
@@ -34,7 +34,7 @@ Dep.app.post( '/:id' , (req,res) => {
             regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Familiar`
         });
     }else if( req.body.persona == "paciente" ){
-        console.log("Entro al paciente " + req.body.nombrePaciente);
+        console.log("Entro paciente " + req.body.nombrePaciente);
         res.render( 'index' , {
             miNombre : req.body.miNombre,
             familiarNombre : req.body.nombreFamiliar,
