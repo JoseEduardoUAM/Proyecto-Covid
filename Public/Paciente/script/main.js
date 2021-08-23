@@ -1,79 +1,57 @@
-import {CrearFormulario} from './funciones.js';
+// Modulo local que contiene funciones
+import {CrearDatosSala, CrearFormulario} from './funciones.js';
 
-let Salas = [];
+/*********Implementacion de SocketIO para la comunicacion con el serviodor************** */
 
+// Se inicia conexion al servidor socket
 const socket = io();
-
+// Evento que se inicia al entrar a la pagina y solicita las salas anteriores
 socket.on( 'connect' , () => {
 	socket.emit( 'solocitarSalas', );
 });
-
+// Evento que obtiene las salas anteriores y llama a la funcion pintar datos
 socket.on( 'salasPrevias' , (salasPrevias) => {
-	Salas = salasPrevias;
-	for( let x of Salas ){
+	for( let x of salasPrevias ){
 		pintarDatos(x);
 	}
 });
-
+// Evento que obtiene las nuevas salas que se esten creando en tiempo real
 socket.on( 'agregarSala' , (datos) => {
-  let m = datos;
-  //console.log(m);
-  Salas.push( m );
-  pintarDatos( m );
+  pintarDatos( datos );
+});
+// Evento que obtiene las nuevas salas que se esten creando en tiempo real
+socket.on( 'borrarSala' , (url) => {
+
+  let Inicio = document.getElementById('Inicio');
+  /*
+  let sala = document.getElementById(url);
+  while (sala.firstChild) {
+    sala.removeChild(sala.firstChild);
+  }
+  */
+  let sala = document.getElementById(url);
+  Inicio.removeChild(sala);
+  //document.body.removeChild(sala);
 });
 
-let Inicio = document.getElementById('Inicio');
+/********Indicaciones para el funcionamiento de la pagina*******************************************/
 
+// Funcion que permite mostrar las salas creadas 
 function pintarDatos( datos ){
-  console.log("Si entro");
-    let Sala = document.createElement("div");
-    Sala.className = "Sala";
-    Sala.id = datos.numeroExpediente;
-
-    let encabezado = document.createElement("div");
-    encabezado.className = "encabezado";
-    Sala.appendChild(encabezado);
-
-    /* Se crea contenido */
-    let contenido = document.createElement("div");
-    contenido.className = "contenido";
-
-    let etiquetas = [
-        ["Nombre del Paciente:",`${datos.nombrePaciente} ${datos.apellidosPaciente}`],
-        ["Numero de Expediente",datos.numeroExpediente],
-        ["Nombre del Familiar",`${datos.nombreFamiliar} ${datos.apellidosFamiliar}`]
-    ];
-
-    for( let x of etiquetas ){
-      /* Se crea primera celda */
-      let celda = document.createElement("div");
-      celda.className = "celda";
-      /* Se crea titulo de la primera celda */
-      let titulo = document.createElement("div");
-      titulo.className = "Titulo";
-      titulo.innerText = x[0];
-      celda.appendChild(titulo);
-      let dato = document.createElement("div");
-      dato.className = "Dato";
-      dato.innerText = x[1];
-      celda.appendChild(dato);
-      contenido.appendChild(celda);
-    }
-
-  /* Se crea el boton */
-  let celdaBtn = document.createElement("div");
-  celdaBtn.className = "celda_btn";
-  let boton = document.createElement("button");
-  boton.className = "btn";
-  boton.innerText = "Enviar";
+  	// Contenedor de la sala con identificador datos.numeroExpediente
+	let Sala = document.createElement("div");
+  /* Se crea contenido */
+  let boton = CrearDatosSala(Sala,datos);
+  // Se agrega una funcion para el boton
   boton.onclick = function(){
-    socket.emit( 'unirseSala' , datos.url);
-    CrearFormulario( `${datos.nombrePaciente} ${datos.apellidosPaciente}` , `${datos.nombreFamiliar} ${datos.apellidosFamiliar}` , datos.url );
-  }
-  celdaBtn.appendChild(boton);
-  contenido.appendChild(celdaBtn);
-
-  Sala.appendChild(contenido);
-
-  Inicio.appendChild(Sala);    
+    socket.emit( 'comprobarSala' , datos.url);
+    // Evento que permite iniciar la video llamada
+    socket.on( 'recibirAutorizacion' , (autorizacion) => {
+      if(autorizacion){
+        CrearFormulario( `${datos.nombrePaciente} ${datos.apellidosPaciente}` , `${datos.nombreFamiliar} ${datos.apellidosFamiliar}` , datos.url );
+      }else{
+        alert("La sala ya esta llena, compruebe que la sala sea la correcta o espere a que se desocupe");
+      }
+    });
+  }   
 };

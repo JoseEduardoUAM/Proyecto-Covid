@@ -8,7 +8,7 @@ export const iniciarConexion = (stream) => {
   let canalRemoto;
 
   socket.on( 'connect' , () => {
-  	socket.emit( 'unirseSala', url.value  );
+  	socket.emit( 'unirseSala', url.value , true  );
   });
 
   // Inicie una RTCPeerConnection para cada cliente
