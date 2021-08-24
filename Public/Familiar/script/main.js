@@ -1,22 +1,26 @@
-import {url,Aviso,Ingresar} from './identificadores.js';
-import {CrearDatos,IngresarSala} from './funciones.js';
+import { btnEnviar, btnURL, conAviso, conBtn, form, URL } from './identificadores.js';
+import { CrearDatos, VerificarDatos } from './funciones.js';
 
 let urlSala;
-
-url.onclick = () => {
-	socket.emit( 'solicitarURL' ,  );
-	Ingresar.disabled = false;
-	Aviso.style.display = null;
-	url.style.display = "none";
-}
-
-Ingresar.onclick = () => {
-	socket.emit( 'nuevaSala' , CrearDatos(urlSala) );
-	IngresarSala(urlSala);
-}
 
 const socket = io('/');
 
 socket.on( 'recibirURL' , (url) => {
 	urlSala = url;
+    URL.value = url;
+    form.action = url;
 });
+
+btnURL.onclick = () =>{
+    socket.emit( 'solicitarURL' ,  );
+    conBtn.style.display = "none";
+    conAviso.style.display = null;
+    btnEnviar.disabled = null;
+}
+
+btnEnviar.onclick = () =>{
+    if( VerificarDatos() ){
+        socket.emit( 'nuevaSala' , CrearDatos(urlSala) );
+    }
+}
+

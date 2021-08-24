@@ -1,35 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Página Familiar</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./Estilos/contenedores.css">
+    <link rel="stylesheet" href="./Estilos/elementos.css">
+    <link rel="stylesheet" href="./Estilos/efectos.css">
+    <title>Familiar</title>
 </head>
-
 <body>
-	<h1> Página Familiar </h1>
-	<form id="Formulario" method="post">
-		<label>Nombre(s) del Paciente:</label>
-		<input type="text" id="nombrePaciente" placeholder="Nombre del Paciente" name="nombrePaciente">
-		<label>Apellidos del Paciente:</label>
-		<input type="text" id="apellidosPaciente" placeholder="Apellidos del Paciente" name="apellidosPaciente">
-		<br><br>
-		<label>Numero de Expediente</label>
-		<input type="text" id="numeroExpediente" placeholder="Numero de Expediente" maxlength="8" name="numeroExpediente">
-		<br><br>
-		<label>Nombre(s) del Visitante</label>
-		<input type="text" id="nombreFamiliar" placeholder="Nombre del Visitante" name="nombreFamiliar">
-		<label>Apellidos del Visitante</label>
-		<input type="text" id="apellidosFamiliar" placeholder="Apellidos del Visitante" name="apellidosFamiliar">
-		<br><br>
-		<button id="url" type="button">Obtener URL</button>
-		<div id="Aviso" style="display:none;">¡Listo!</div>
-		<br><br>
-		<button id="Ingresar" type="submit" disabled>Ingresar</buton>
-	</form>
+    <div id="Inicio">
+        <div id="Contenido">
+            <div id="Header">
+                <div id="TituloHeader">
+                    Datos para crear sala de Videoconferencia
+                </div>
+            </div>
+            <form id="Formulario" method="POST">
+                <div id="PrimeraPantalla" >
+                    <div class="celda">
+                        <input type="text" name="nombreFamiliar" id="nombreFamiliar" required autocomplete="off">
+                        <label for="nombreFamiliar">Nombre(s) del Familiar</label>
+                    </div>
+                    <div class="celda">
+                        <input type="text" name="apellidosFamiliar" id="apellidoFamiliar" required required autocomplete="off">
+                        <label for="apellidoFamiliar">Apellidos del Familiar</label>
+                    </div>
+                    <div class="celda dos">
+                        <input type="text" name="numeroExpediente" id="numeroExpediente" required autocomplete="off" required>
+                        <label for="numeroExpediente">Número de Expediente</label>
+                    </div>
+                    <div class="celda">
+                        <input type="text" name="nombrePaciente" id="nombrePaciente" required autocomplete="off" required>
+                        <label for="nombrePaciente">Nombre(s) del Familiar</label>
+                    </div>
+                    <div class="celda">
+                        <input type="text" name="apellidosPaciente" id="apellidoPaciente" required>
+                        <label for="apellidoPaciente">Apellidos del Paciente</label>
+                    </div>
+                    <div class="celda dos">
+                        <div id="ContenedorBoton"> 
+							<button type="button" id="BotonURL">Obtener URL</button> 
+						</div>
+                        <div id="ContenedorAviso" style="display: none;">¡Listo!</div>
+                    </div>
+                    <div class="celda dos"> 
+						<button type="button" id="BotonEnviar" disabled>Enviar Datos</button> 
+					</div>
+                </div>
+                <div id="SegundaPantalla" style="display: none;">
+                    <div class="ContenedorBoton">
+                        <input type="text" id="Persona" name="persona" value="familiar" style="display: none;">
+                        <input type="text" id="URL" name="url" style="display: none;">
+                        <button type="submit" id="BotonIniciar">Iniciar Videollamada</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+	<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="./script/main.js" charset="utf-8" type="module"></script>
 </body>
-
-<script src="/socket.io/socket.io.js" charset="utf-8"></script>
-<script src="./script/main.js" charset="utf-8" type="module"></script>
-
 </html>

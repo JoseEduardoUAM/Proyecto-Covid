@@ -1,33 +1,30 @@
-import {Formulario,nombrePaciente,apellidosPaciente,numeroExpediente,nombreFamiliar,apellidosFamiliar} from './identificadores.js';
+import { inputs, pantalla1, pantalla2 } from './identificadores.js';
+
+export function VerificarDatos(){
+	let verificar = [];
+	for ( let x of inputs) {
+		verificar.push( x.value.length != 0 ? true : false );
+	}
+	if( verificar[0] & verificar[1] & verificar[2] & verificar[3] & verificar[4]){
+		pantalla1.style.display = "none";
+		pantalla2.style.display = null;
+		return true;
+	}else{
+		alert("Es necesario agregar todos los datos");
+		return false;
+	}
+}
 
 export function CrearDatos(url){
 	let datos = new Datos(
-		nombrePaciente.value,
-		apellidosPaciente.value,
-		numeroExpediente.value,
-		nombreFamiliar.value,
-		apellidosFamiliar.value,
+		inputs[0].value,
+		inputs[1].value,
+		inputs[2].value,
+		inputs[3].value,
+		inputs[4].value,
 		url
 	);
 	return datos;
-}
-
-export function IngresarSala(url){
-	nombrePaciente.disabled = true;
-	apellidosPaciente.disabled = true;
-	numeroExpediente.disabled = true;
-
-	let agregar = [ [ "url" , url ] , [ "persona" , "familiar" ] ];
-
-	for( let x of agregar ){
-		let input = document.createElement('input');
-		input.style.display = "none";
-		input.type = "text";
-		input.name = x[0];
-		input.value = x[1];
-		Formulario.appendChild( input );
-	}
-	Formulario.action = url;
 }
 
 function Datos( nombrePaciente , apellidosPaciente , numeroExpediente , nombreFamiliar, apellidosFamiliar , url ){

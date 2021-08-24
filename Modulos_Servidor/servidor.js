@@ -2,7 +2,9 @@
 const Dep = require('./Dependencias.js');
 
 //Se agrega el puerto 3000
-Dep.app.set( 'port' , process.env.PORT || 3000);
+Dep.app.set( 'port' , process.env.PORT || 3000 );
+//Se agrega la Direccion IP
+Dep.app.set( 'address' , '192.168.1.67' ); 
 
 //Dirección de los archivos estaticos
 Dep.app.use( Dep.express.static( Dep.path.join( __dirname , '..' , 'Public' ) ) );
@@ -24,16 +26,20 @@ Dep.app.use(Dep.express.urlencoded({ extended: true }));
 //Documentos dinamicos con ejs
 Dep.app.post( '/:id' , (req,res) => {
     if( req.body.persona == "familiar" ){
+        //console.log("Entro familiar " + req.body.nombreFamiliar + " " + req.body.apellidosFamiliar);
         res.render( 'index' , {
-            nombre : req.body.nombreFamiliar + " " + req.body.apellidosFamiliar,
+            miNombre : req.body.nombreFamiliar + " " + req.body.apellidosFamiliar,
+            familiarNombre : req.body.nombrePaciente + " " + req.body.apellidosPaciente,
             url : req.body.url,
-            regresar : "https://192.168.1.67:3000/Familiar"
+            regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Familiar`
         });
     }else if( req.body.persona == "paciente" ){
+        //console.log("Entro paciente " + req.body.nombrePaciente);
         res.render( 'index' , {
-            nombre : req.body.nombrePaciente,
+            miNombre : req.body.miNombre,
+            familiarNombre : req.body.nombreFamiliar,
             url : req.body.url,
-            regresar : "https://192.168.1.67:3000/Paciente"
+            regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Paciente`
         });
     }
 });
@@ -48,5 +54,7 @@ const server = Dep.https.createServer( {
 
 module.exports = {
 	app: Dep.app,
-	server: server
+	server: server,
+    puerto: Dep.app.get('port'),
+    direccionIP: Dep.app.get('address')
 }

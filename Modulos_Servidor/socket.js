@@ -15,46 +15,77 @@ let Salas = [];
 
 io.on('connection' , (socket) => {
 
+	/**************Eventos para el Familiar***************************/
+
+	//Evento Solicitar URL que crea y envia la url de la sala al Familiar
 	socket.on( 'solicitarURL' , () => {
-		let url = 'https://192.168.1.67:3000/' + Funcion.generarURL();
-		socket.emit('recibirURL' , url );
+		socket.emit('recibirURL' , `https://${Servidor.direccionIP}:${Servidor.puerto}/` + Funcion.generarURL() );
 	});
 
+	/***************Eventos para el Paciente************************/
+
+	// Evento que envia las salas que se crearon antes de la conexion del Paciente
 	socket.on( 'solocitarSalas' , () => {
 		socket.emit('salasPrevias' , Salas );
 	});
-
+	// Evento que escucha cuando se crea una nueva sala y la envia al Paciente
 	socket.on( 'nuevaSala' , (datos) => {
-		Salas.push( datos );
-		io.sockets.emit( 'agregarSala' , datos );
+		Salas.push( datos );                         // Se guarda la sala 
+		io.sockets.emit( 'agregarSala' , datos );	 // Se envia la nueva sala a todos los Pacientes
+	});
+	// Evento que verifica si se puede acceder a la sala
+	socket.on( 'comprobarSala' , (url) => {
+		let numUsuarios = io.sockets.adapter.rooms.get(url).size;
+		if( numUsuarios < 2 ){
+			socket.emit( 'recibirAutorizacion' , true );
+		}else{
+			socket.emit( 'recibirAutorizacion' , false );
+		}
 	});
 
-	//Se une a la sala del url y si existen 2 clientes conectados emite su id
-	socket.on( 'unirseSala' , (url) => {
-		console.log( 'El cliente ' + socket.id + " entro"  );
+	/****************Eventos para la Sala*******************************/
+
+	// Variable que indica si esta en la sala de videoconferencia
+	let indicadorSala = false;
+	// Variable que indica en que sala se encuentra
+	let sala = null;
+	//Evento que permite unir al [ Paciente | Familiar ] a sala mediante la url y si existen 2 clientes conectados emite su id
+	socket.on( 'unirseSala' , (url,indicador) => {
+		indicadorSala = indicador;
+		sala = url;
 		socket.join(url);
 		let usuarios = io.sockets.adapter.rooms.get(url);
 	      usuarios.forEach(( x ) => {
 	          if( x != socket.id ){
 	              socket.emit('other-users',x);
-	              console.log( x );
 	          }
 	      });
 	});
-
 	// Enviar oferta para iniciar la conexión
     socket.on('offer', (socketId, description) => {
       socket.to(socketId).emit('offer', socket.id, description);
     });
-
     // Enviar respuesta de solicitud de oferta
     socket.on('answer', (socketId, description) => {
       socket.to(socketId).emit('answer', description);
     });
-
     // Enviar señales para establecer el canal de comunicación
     socket.on('candidate', (socketId, candidate) => {
       socket.to(socketId).emit('candidate', candidate);
     });
+	// Evento que se inicia al entrar a la pagina y solicita las salas anteriores
+	socket.on( 'disconnect' , () => {
+		if( indicadorSala & io.sockets.adapter.rooms.get(sala) == undefined){
+			let numeroExpediente;
+			Salas = Salas.filter( (x) => {
+				if(x.url == sala){
+					numeroExpediente = x.numeroExpediente;
+					return false;
+				}
+				return true;
+			});
+			io.sockets.emit('borrarSala' , numeroExpediente );
+		}
+	});
 
 });

@@ -1,4 +1,4 @@
-import {entradaMensaje,botonEnviar,videoRemoto,registrarMensaje,url,nombre} from './identificadores.js';
+import {entradaMensaje,videoRemoto,registrarMensaje,url, miNombre,familiarNombre,registrarAviso} from './identificadores.js';
 
 export const iniciarConexion = (stream) => {
   const socket = io('/');
@@ -8,7 +8,7 @@ export const iniciarConexion = (stream) => {
   let canalRemoto;
 
   socket.on( 'connect' , () => {
-  	socket.emit( 'unirseSala', url.value  );
+  	socket.emit( 'unirseSala', url.value , true  );
   });
 
   // Inicie una RTCPeerConnection para cada cliente
@@ -39,11 +39,11 @@ export const iniciarConexion = (stream) => {
     canalLocal = conexionLocal.createDataChannel('chat_channel');
 
     // Llamada a función que recibe un mensaje en el canal
-    canalLocal.onmessage = (event) => registrarMensaje(`${event.data}`);
+    canalLocal.onmessage = (event) => registrarMensaje(`${event.data}`,"familiarMensaje", `${familiarNombre.value}`);
     // Function Called When Channel is Opened
-    canalLocal.onopen = (event) => registrarMensaje(`Channel Changed: ${event.type}`);
+    canalLocal.onopen = (event) => registrarAviso("Canal Abierto","SistemaAbierto");
     // Function Called When Channel is Closed
-    canalLocal.onclose = (event) => registrarMensaje(`Channel Changed: ${event.type}`);
+    canalLocal.onclose = (event) => registrarAviso("Canal Cerrado","SistemaCerrado");
 
     // Crear oferta, establecer descripción local y enviar oferta a otros usuarios conectados
     conexionLocal
@@ -78,11 +78,11 @@ export const iniciarConexion = (stream) => {
       canalRemoto = channel;
 
       // Llamada a funcion que recibe un mensaje en el canal
-      canalRemoto.onmessage = (event) => registrarMensaje(`${event.data}`);
+      canalRemoto.onmessage = (event) => registrarMensaje(`${event.data}`,"familiarMensaje", `${familiarNombre.value}`);
       // Función llamada cuando se abre el canal
-      canalRemoto.onopen = (event) => registrarMensaje(`Canal Abierto: ${event.type}`);
+      canalRemoto.onopen = (event) => registrarAviso("Canal Abierto","SistemaAbierto");
       // Función llamada cuando el canal está cerrado
-      canalRemoto.onclose = (event) => registrarMensaje(`Canal Cerrado: ${event.type}`);
+      canalRemoto.onclose = (event) => registrarAviso("Canal Cerrado","SistemaCerrado");
     }
 
     // Establecer descripción local y remota y crear respuesta
@@ -107,18 +107,22 @@ export const iniciarConexion = (stream) => {
     conn.addIceCandidate(new RTCIceCandidate(candidate));
   });
 
-  // Asigne el clic del botón de mensaje
-  botonEnviar.addEventListener('click', () => {
-    // GET mensaje de entrada
-    const message = nombre.value + " : " + entradaMensaje.value;
-    // Limpiar entrada
-    entradaMensaje.value = '';
-    // Mensaje de registro como enviado
-    registrarMensaje(`${message}`);
+  entradaMensaje.addEventListener('keydown', inputCharacters);
 
-    // GET el canal (puede ser local o remoto)
-    const channel = canalLocal || canalRemoto;
-    // Enviar mensaje. El otro cliente recibirá este mensaje en la función 'onmessage' del canal
-    channel.send(message);
-  });
+  // Asigne el clic del botón de mensaje
+  function inputCharacters(event) {
+    if (event.keyCode == 13) {
+      // GET mensaje de entrada
+      const message = entradaMensaje.value;
+      // Limpiar entrada
+      entradaMensaje.value = '';
+      // Mensaje de registro como enviado
+      registrarMensaje(`${message}`,"miMensaje", `${miNombre.value}`);
+
+      // GET el canal (puede ser local o remoto)
+      const channel = canalLocal || canalRemoto;
+      // Enviar mensaje. El otro cliente recibirá este mensaje en la función 'onmessage' del canal
+      channel.send(message);
+    }
+  }
 }

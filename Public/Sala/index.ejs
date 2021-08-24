@@ -1,33 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title>Sala</title>
-	</head>
-	<body>
-		<h1> Sala </h1>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="./Estilos/contenedores.css">
+	<link rel="stylesheet" href="./Estilos/elementos.css">
+	<link rel="stylesheet" href="./Estilos/efectos.css">
+	<title>Sala</title>
+</head>
+<body>
+	<div id="Inicio">
+		<!-- Primera columna -->
+		<div id="Columna1">
+			<div class="SeccionVideoRemoto">
+				<div class="ContenedorVideo">
+					<video playsinline autoplay id="video-remoto" poster="Imagenes/Usuario_No_Definido.png"></video>
+				</div>
+				<div class="ContenedorInterno sombra1">
+					<div class="ContenedorNombre"> <%-familiarNombre%> </div>
+					<div class="ContenedorControles">
+						<div class="ImagenColgar">
+							<img src="./Imagenes/Colgar.png" id="BotonSalir">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Segunda columna-->
+		<div id="Columna2">
+			<div class="SeccionVideoLocal">
+				<div class="ContenedorVideo">
+					<video playsinline autoplay muted id="video-local" poster="Imagenes/Usuario_No_Definido.png"></video>
+				</div>
+				<div class="ContenedorInterno sombra2">
+					<div class="ContenedorNombre"> <%-miNombre%> </div>
+				</div>
+			</div>
+			<div class="ContenedorChat">
+				<div id="Mensajes"></div>
+				<div class="EscribirMensaje">
+					<input type="text" name="entrada-mensaje" id="entrada-mensaje" required autocomplete="off">
+					<label for="entrada-mensaje">Escribe el mensaje</label>
+				</div>
+			</div>
+		</div>
+	</div>
 
-		<!-- My Video and Remote Video from connection -->
-	    <div id="contenedor-video">
-	      <video playsinline autoplay muted id="video-local"></video>
-	      <video playsinline autoplay id="video-remoto"></video>
-	    </div>
+	<input type="text" id="miNombre" value="<%-miNombre%>" disabled style="display:none">
+	<input type="text" id="familiarNombre" value="<%-familiarNombre%>" disabled style="display:none">
+	<input type="text" id="url" value="<%-url%>" disabled style="display:none">
+	<input type="text" id="regresar" value="<%-regresar%>" disabled style="display:none">
 
-	    <!-- Input to send mensajes -->
-	    <div>
-	      <span style="font-weight: bold">Mensaje: </span>
-	      <input type="text" id="entrada-mensaje" title="Message to Send!">
-	      <button id="boton-mensaje">Enviar</button>
-	    </div>
+</body>
 
-		<input type="text" id="nombre" value="<%-nombre%>" disabled>
-		<input type="text" id="url" value="<%-url%>" disabled>
-		<input type="text" id="regresar" value="<%-regresar%>" disabled>
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script src="/script/main.js" charset="utf-8" type="module"></script>
 
-	    <!-- Area to Print Images -->
-	    <div class="mensajes"></div>
-
-		<script src="/socket.io/socket.io.js" charset="utf-8"></script>
-		<script src="/script/main.js" charset="utf-8" type="module"></script>
-	</body>
 </html>
