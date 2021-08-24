@@ -49,7 +49,6 @@ io.on('connection' , (socket) => {
 	let indicadorSala = false;
 	// Variable que indica en que sala se encuentra
 	let sala = null;
-
 	//Evento que permite unir al [ Paciente | Familiar ] a sala mediante la url y si existen 2 clientes conectados emite su id
 	socket.on( 'unirseSala' , (url,indicador) => {
 		indicadorSala = indicador;
@@ -74,7 +73,6 @@ io.on('connection' , (socket) => {
     socket.on('candidate', (socketId, candidate) => {
       socket.to(socketId).emit('candidate', candidate);
     });
-
 	// Evento que se inicia al entrar a la pagina y solicita las salas anteriores
 	socket.on( 'disconnect' , () => {
 		if( indicadorSala & io.sockets.adapter.rooms.get(sala) == undefined){
