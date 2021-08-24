@@ -145,7 +145,8 @@ body{
   display: inline-block;
   width: 40%;
   border-radius: 5px;
-  margin-top: 2% 30% 0% 30%;
+  margin: 2% 30% 0% 30%;
+  text-align: center;
 }
 
 .SistemaAbierto{

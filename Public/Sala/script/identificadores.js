@@ -22,7 +22,7 @@ export const registrarMensaje = (msg,clase,nombrePersona) => {
 
 export const registrarAviso = (msg,clase) => {
   let contenedorMensaje = document.createElement("div");
-  contenedorMensaje.className = `ContenedorMsg ${clase}`;
+  contenedorMensaje.className = `ContenedorAviso ${clase}`;
   contenedorMensaje.innerText = msg;
   mensajes.appendChild(contenedorMensaje);
 };
