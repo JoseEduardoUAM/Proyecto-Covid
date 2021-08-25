@@ -1,5 +1,5 @@
 // Modulo local que contiene funciones
-import {CrearDatosSala, CrearFormulario} from './funciones.js';
+import {CrearDatosSala, CrearFormulario, verificarNumeroSalas} from './funciones.js';
 
 /*********Implementacion de SocketIO para la comunicacion con el serviodor************** */
 
@@ -13,25 +13,20 @@ socket.on( 'connect' , () => {
 socket.on( 'salasPrevias' , (salasPrevias) => {
 	for( let x of salasPrevias ){
 		pintarDatos(x);
+    verificarNumeroSalas();
 	}
 });
 // Evento que obtiene las nuevas salas que se esten creando en tiempo real
 socket.on( 'agregarSala' , (datos) => {
   pintarDatos( datos );
+  verificarNumeroSalas();
 });
 // Evento que obtiene las nuevas salas que se esten creando en tiempo real
 socket.on( 'borrarSala' , (url) => {
-
   let Inicio = document.getElementById('Inicio');
-  /*
-  let sala = document.getElementById(url);
-  while (sala.firstChild) {
-    sala.removeChild(sala.firstChild);
-  }
-  */
   let sala = document.getElementById(url);
   Inicio.removeChild(sala);
-  //document.body.removeChild(sala);
+  verificarNumeroSalas();
 });
 
 /********Indicaciones para el funcionamiento de la pagina*******************************************/

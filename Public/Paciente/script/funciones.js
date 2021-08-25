@@ -64,3 +64,14 @@ export function CrearDatosSala( Sala , datos){
 	Inicio.appendChild(Sala); 
 	return boton;
 }
+
+export function verificarNumeroSalas(){
+    let elementos = document.querySelectorAll('#Inicio .Sala');
+	let msgAviso = document.getElementById("MensajeAviso");
+    console.log(elementos.length);
+    if( elementos.length > 0 ){
+        msgAviso.style.display = "none";
+    }else{
+		msgAviso.style.display = null;
+	}
+}
