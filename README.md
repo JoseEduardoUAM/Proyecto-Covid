@@ -40,22 +40,26 @@ videoconferencia existentes y poder seleccionar a cuál de ellas conectarse.
 videoconferencia en la sala que fue creada o seleccionada.
 
 ## Desarrollo del Código
-Para poder instalar las dependencias de node.js es necesario:
+Instalar las dependencias de node.js:
 ```
-node install 
+npm install 
 ```
 
 Para correr el servidor:
 ```
-npm run dev 
+npm start
 ```
 
 La página para el familiar:
 ```
+https://{direccion ip}:{puerto}/Familiar/ 
+# Por default 
 https://192.168.1.67:3000/Familiar/ 
 ```
 
 La página para el paciente:
 ```
+https://{direccion ip}:{puerto}/Paciente/ 
+# Por default 
 https://192.168.1.67:3000/Paciente/ 
 ```
