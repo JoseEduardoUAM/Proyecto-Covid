@@ -20,13 +20,13 @@ body{
 #uno{
     color: rgb(255, 255, 255);
     font-size: 600%;
-    text-shadow: -4px 5px 0px rgba(0,0,0,0.33);
+    text-shadow: -4px 5px 0px rgba(0, 0, 0, 0.692);
 }
 
 #dos{
     color: rgb(255, 255, 255);
     font-size: 400%;
-    text-shadow: -4px 5px 0px rgba(0,0,0,0.33);
+    text-shadow: -4px 5px 0px rgba(0, 0, 0, 0.692);
 }
 
 #tres,#cuatro{
