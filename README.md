@@ -39,3 +39,34 @@ videoconferencia existentes y poder seleccionar a cuál de ellas conectarse.
 4. Diseñar e implementar un módulo que permita iniciar una conversación de
 videoconferencia en la sala que fue creada o seleccionada.
 
+## Desarrollo del Código
+Instalar las dependencias de node.js:
+```
+npm install 
+```
+
+Para correr el servidor:
+```
+npm start
+```
+
+La página para el familiar:
+``` sh
+# Direccion URL
+https://{direccion ip}:{puerto}/Familiar/ 
+
+# Por default 
+https://192.168.1.67:3000/Familiar/ 
+```
+
+La página para el paciente:
+``` sh
+# Direccion URL
+https://{direccion ip}:{puerto}/Paciente/ 
+
+# Por default 
+https://192.168.1.67:3000/Paciente/ 
+```
+
+## Autor
+- #### Jose Eduardo Hernandez de la Cruz

@@ -1,30 +1,39 @@
 /*Horizontal*/
 @media screen and (max-device-width:930px) and (orientation: landscape){
     #Contenido{
-        width: 800px;
+        width: 850px;
         grid-template-columns: 40% 60%;
+    }
+    input{
+        font-size: 170%;
+    }
+    button{
+        font-size: 140%;
     }
 }
 
 /*Vertical*/
 @media screen and (max-device-width:900px) and (orientation: portrait) {
     #Contenido{
-        width: 700px;
-        height: 650px;
+        width: 850px;
+        height: 800px;
         grid-template-columns: 100%;
         grid-template-rows: 25% 75%;
         margin: 10% auto auto auto;
     }
     #TituloHeader{
-        font-size: 200%;
+        font-size: 260%;
     }
     label{
-        font-size: 140%;
+        font-size: 160%;
     }
     input{
-        font-size: 120%;
+        font-size: 170%;
     }
     input:valid + label{
         font-size: 110%;
+    }
+    button{
+        font-size: 160%;
     }
 }

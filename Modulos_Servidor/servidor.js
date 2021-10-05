@@ -39,8 +39,13 @@ Dep.app.post( '/:id' , (req,res) => {
             url : req.body.url,
             regresar : `https://${Dep.app.get('address')}:${Dep.app.get('port')}/Paciente`
         });
+    }else{
+        res.send('¡O no!, la página a la que deceas acceder no existe');
     }
 });
+
+//Respuesta a una solicitud incorrecta
+Dep.app.use('/:error', Dep.express.static( Dep.path.join( __dirname , '..' , 'Public' , 'Error' ) ));
 
 //Configuracion del Servidor https
 const server = Dep.https.createServer( {
