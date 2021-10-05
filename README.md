@@ -39,3 +39,15 @@ videoconferencia existentes y poder seleccionar a cuál de ellas conectarse.
 4. Diseñar e implementar un módulo que permita iniciar una conversación de
 videoconferencia en la sala que fue creada o seleccionada.
 
+## Desarrollo del Código
+Para poder instalar las dependencias de node.js es necesario:
+`` node install ``
+
+Para correr el servidor:
+` npm run dev `
+
+La página para el familiar:
+` https://192.168.1.67:3000/Familiar/ `
+
+La página para el paciente:
+` https://192.168.1.67:3000/Paciente/ `
