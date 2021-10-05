@@ -35,11 +35,13 @@ io.on('connection' , (socket) => {
 	});
 	// Evento que verifica si se puede acceder a la sala
 	socket.on( 'comprobarSala' , (url) => {
-		let numUsuarios = io.sockets.adapter.rooms.get(url).size;
+		//let numUsuarios = io.sockets.adapter.rooms.get(url).size;
 		/**
 		 * const clients = io.sockets.adapter.rooms.get('Room Name');
 		 * const numClients = clients ? clients.size : 0;
 		 */
+		 let usuarios = io.sockets.adapter.rooms.get(url);
+		 let numUsuarios = usuarios ? usuarios.size : 0;
 		if( numUsuarios < 2 ){
 			socket.emit( 'recibirAutorizacion' , true );
 		}else{

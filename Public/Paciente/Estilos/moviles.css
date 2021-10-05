@@ -8,6 +8,11 @@
         max-width: 260px;
         margin: auto;
     }
+    #MensajeAviso{
+        grid-column: 1 / span 3;
+        padding: 5%;
+        font-size: 260%;
+    }
 }
 
 /*Vertical*/
@@ -23,5 +28,10 @@
         height: 400px;
         font-size: 150%;
         margin: auto;
+    }
+    #MensajeAviso{
+        grid-column: 1 / span 2;
+        padding: 5% 10% 5% 10%;
+        font-size: 280%;
     }
 }
