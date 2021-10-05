@@ -2,9 +2,7 @@
 const mensajes = document.getElementById('Mensajes');
 
 export const entradaMensaje = document.getElementById('entrada-mensaje');
-
 export const videoLocal = document.getElementById('video-local');
-
 export const videoRemoto = document.getElementById('video-remoto');
 
 export const registrarMensaje = (msg,clase,nombrePersona) => {
@@ -27,9 +25,7 @@ export const registrarAviso = (msg,clase) => {
   mensajes.appendChild(contenedorMensaje);
 };
 
-export let BotonSalir = document.getElementById("BotonSalir");
-
-BotonSalir.onclick = () => {
+export let BotonSalir = document.getElementById("BotonSalir").onclick = () => {
   location.href=regresar.value;
 }
 

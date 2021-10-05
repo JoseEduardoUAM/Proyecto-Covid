@@ -13,14 +13,15 @@ body{
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(4,25%);
-    grid-auto-rows: 35%;
+    grid-auto-rows: 320px;
     overflow-y: scroll;
 }
 
 .Sala{
-    width: 90%;
-    height: 90%;
-    margin: auto;
+    min-width: 170px;
+    max-width: 260px;
+    height: 280px;
+    margin: auto 5% auto 5%;
     display: grid;
     grid-template-rows: 20% 80%;
     box-shadow: -1px 3px 8px 4px rgba(0,0,0,0.61);

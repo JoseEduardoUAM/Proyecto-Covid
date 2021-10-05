@@ -14,7 +14,6 @@ export const iniciarConexion = (stream) => {
   // Inicie una RTCPeerConnection para cada cliente
   socket.on('other-users', (otrosUsuarios) => {
     // Ignorar cuando no exista otros usuarios conectados.
-    //if (!otrosUsuarios || !otrosUsuarios.length) return;
 
     //const socketId = otrosUsuarios[0];
 	const socketId = otrosUsuarios;

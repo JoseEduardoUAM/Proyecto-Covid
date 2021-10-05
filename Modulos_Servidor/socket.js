@@ -16,14 +16,12 @@ let Salas = [];
 io.on('connection' , (socket) => {
 
 	/**************Eventos para el Familiar***************************/
-
 	//Evento Solicitar URL que crea y envia la url de la sala al Familiar
 	socket.on( 'solicitarURL' , () => {
 		socket.emit('recibirURL' , `https://${Servidor.direccionIP}:${Servidor.puerto}/` + Funcion.generarURL() );
 	});
 
 	/***************Eventos para el Paciente************************/
-
 	// Evento que envia las salas que se crearon antes de la conexion del Paciente
 	socket.on( 'solocitarSalas' , () => {
 		socket.emit('salasPrevias' , Salas );
@@ -35,7 +33,8 @@ io.on('connection' , (socket) => {
 	});
 	// Evento que verifica si se puede acceder a la sala
 	socket.on( 'comprobarSala' , (url) => {
-		let numUsuarios = io.sockets.adapter.rooms.get(url).size;
+		 let usuarios = io.sockets.adapter.rooms.get(url);
+		 let numUsuarios = usuarios ? usuarios.size : 0;
 		if( numUsuarios < 2 ){
 			socket.emit( 'recibirAutorizacion' , true );
 		}else{
@@ -44,7 +43,6 @@ io.on('connection' , (socket) => {
 	});
 
 	/****************Eventos para la Sala*******************************/
-
 	// Variable que indica si esta en la sala de videoconferencia
 	let indicadorSala = false;
 	// Variable que indica en que sala se encuentra

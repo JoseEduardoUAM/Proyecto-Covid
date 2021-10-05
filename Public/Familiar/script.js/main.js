@@ -23,4 +23,3 @@ btnEnviar.onclick = () =>{
         socket.emit( 'nuevaSala' , CrearDatos(urlSala) );
     }
 }
-
