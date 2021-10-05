@@ -1,0 +1,99 @@
+:root{
+    --color_header: #063823;
+    --color_sombra: #2e2e2e;
+    --color_texto: #238649;
+    --color_texto_header: #ffffff;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+/* Contendor Principal************************************************/
+#Inicio{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+/*************************************************************************/
+#Contenido{
+    width: 900px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 100%;
+    box-shadow: 0px 17px 30px var(--color_sombra);
+	border-radius: 10px;
+    margin: auto;
+}
+/*************************************************************************/
+#Header{
+    background-color: var(--color_header);
+    display: grid;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#TituloHeader{
+    width: 80%;
+    height: 30%;
+    color: var(--color_texto_header);
+    font-size: 150%;
+    margin: auto;
+    text-align: center;
+}
+/*************************************************************************/
+#Formulario{
+    width: 100%;
+    height: 100%;
+    display: grid;
+}
+/*************************************************************************/
+#PrimeraPantalla{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat( 3 , 25% ) auto auto;
+    box-sizing: border-box;
+}
+.celda{
+    box-sizing: content-box;
+    width: 90%;
+    height: 70%;
+    margin: auto;
+    position: relative;
+}
+
+.dos{
+    width: 35%;
+    grid-column: span 2;
+}
+#ContenedorBoton{
+    width: 100%;
+    height: 100%;
+}
+#ContenedorAviso{
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+    color: var(--color_header);
+    font-weight: 900;
+    font-size: 110%;
+}
+/*************************************************************************/
+#SegundaPantalla{
+    display: grid;
+    width: 100%;
+    height: 100%;
+}
+
+.ContenedorBoton{
+    width: 35%;
+    height: 15%;
+    margin: auto;
+}

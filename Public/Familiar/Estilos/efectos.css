@@ -1,0 +1,21 @@
+input:focus{
+    outline: none;
+    background: none;
+    border-bottom: 4px solid var(--color_texto);
+}
+
+input:valid + label{
+    top: 0px;
+    left: 0px;
+    color: var(--color_header);
+    font-weight: 900;
+    font-size: 80%;
+}
+
+button:hover{
+    background-color: #11683ca2;
+}
+
+button:disabled{
+    background-color: #56745d;
+}
