@@ -67,3 +67,6 @@ https://{direccion ip}:{puerto}/Paciente/
 # Por default 
 https://192.168.1.67:3000/Paciente/ 
 ```
+
+## Autor
+Jose Eduardo Hernandez de la Cruz
