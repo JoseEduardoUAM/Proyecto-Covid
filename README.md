@@ -51,15 +51,19 @@ npm start
 ```
 
 La página para el familiar:
-```
+``` sh
+# Direccion URL
 https://{direccion ip}:{puerto}/Familiar/ 
+
 # Por default 
 https://192.168.1.67:3000/Familiar/ 
 ```
 
 La página para el paciente:
-```
+``` sh
+# Direccion URL
 https://{direccion ip}:{puerto}/Paciente/ 
+
 # Por default 
 https://192.168.1.67:3000/Paciente/ 
 ```
