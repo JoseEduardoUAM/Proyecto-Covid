@@ -1,5 +1,5 @@
 //Módulo local Dep.js
-const Dep = require('./Dependencias.js');
+const Dep = require('./dependencias.js');
 
 //Se agrega el puerto 3000
 Dep.app.set( 'port' , process.env.PORT || 3000 );
